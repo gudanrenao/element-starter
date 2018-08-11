@@ -1,14 +1,17 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div>
+    <img src="../../assets/logo.png">
+    <div>
+      <el-button @click="startHacking">Start</el-button>
+      <el-button @click="enter">登录主页面</el-button>
+      <el-button @click="test">测试</el-button>
+    </div>
   </div>
 </template>
 
 <script>
-  import index from './page/common/index'
-
   export default {
-    components: {index},
+    name: "login",
     methods: {
       startHacking() {
         this.$notify({
@@ -28,14 +31,6 @@
   }
 </script>
 
-<style>
-  #app {
-    font-family: Helvetica, sans-serif;
-    text-align: center;
-    height: 100%;
-  }
-  body,html {
-    height: 100%;
-    width: 100%;
-  }
+<style scoped>
+
 </style>
