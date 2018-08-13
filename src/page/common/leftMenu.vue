@@ -12,18 +12,18 @@
     <el-submenu index="1">
       <template slot="title">
         <i class="el-icon-location"></i>
-        <span>商家信息</span>
+        <span>信息中心</span>
       </template>
-      <el-menu-item index="/merchant/index">商家统计</el-menu-item>
-      <el-menu-item index="1-2">商家列表</el-menu-item>
+      <el-menu-item index="/merchant/index">商家信息</el-menu-item>
+      <el-menu-item index="1-2">会员信息</el-menu-item>
     </el-submenu>
     <el-submenu index="2">
       <template slot="title">
         <i class="el-icon-location"></i>
-        <span>会员信息</span>
+        <span>订单中心</span>
       </template>
-      <el-menu-item index="2-1">会员统计</el-menu-item>
-      <el-menu-item index="2-2">会员列表</el-menu-item>
+      <el-menu-item index="2-1">扫码订单</el-menu-item>
+      <el-menu-item index="2-2">团购订单</el-menu-item>
     </el-submenu>
   </el-menu>
 
