@@ -4,7 +4,7 @@
       <top></top>
     </el-header>
     <el-container class="main-container">
-      <el-aside class="main-menu" ref="menu" style="width: auto;height: 100%;background-color: #293541">
+      <el-aside class="main-menu" ref="menu" style="width: 200px;height: 100%;background-color: #293541">
         <!--<left-menu ref="menuWrapper"></left-menu>-->
         <left-menu></left-menu>
       </el-aside>

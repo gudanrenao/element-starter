@@ -31,7 +31,7 @@
 <style>
   #app {
     font-family: Helvetica, sans-serif;
-    text-align: center;
+    /*text-align: center;*/
     height: 100%;
   }
   body,html {

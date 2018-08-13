@@ -18,6 +18,11 @@ const merchantIndex = (resolve) => {
     resolve(content)
   })
 }
+const scanCodeOrderList = (resolve) => {
+  import('~/page/order/scanCodeOrderList').then((content) => {
+    resolve(content)
+  })
+}
 export default new Router({
   routes: [
     {
@@ -29,6 +34,10 @@ export default new Router({
         {
           path: '/merchant/index',
           component: merchantIndex
+        },
+        {
+          path: '/order/scanCodeOrderList',
+          component: scanCodeOrderList
         }
       ]
     }, {

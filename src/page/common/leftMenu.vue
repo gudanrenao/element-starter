@@ -1,14 +1,14 @@
 <template>
 
   <el-menu
-    default-active="/merchant/index"
+    default-active="currPath"
     class="el-menu-vertical-demo"
     @open="handleOpen"
     @close="handleClose"
-    background-color="#545c64"
+    background-color="rgb(41, 53, 65)"
     text-color="#fff"
     :router="true"
-    active-text-color="#ffd04b">
+    active-text-color="#fb991a">
     <el-submenu index="1">
       <template slot="title">
         <i class="el-icon-location"></i>
@@ -22,7 +22,7 @@
         <i class="el-icon-location"></i>
         <span>订单中心</span>
       </template>
-      <el-menu-item index="2-1">扫码订单</el-menu-item>
+      <el-menu-item index="/order/scanCodeOrderList">扫码订单</el-menu-item>
       <el-menu-item index="2-2">团购订单</el-menu-item>
     </el-submenu>
   </el-menu>
@@ -31,6 +31,14 @@
 
 <script>
   export default {
+    data() {
+      return {
+        currPath: '/merchant/index'
+      }
+    },
+    created() {
+      this.currPath = this.$router.currentRoute.fullPath
+    },
     methods: {
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
@@ -44,14 +52,8 @@
 
 <style scoped>
 
-  .icon-font-style {
-    font-size: 20px;
-  }
-
-  .menu-ture {
-    /*:not(.el-menu--collapse)*/
-    width: 200px;
-    border-right: none;
+  .el-menu-item {
+    padding-left: 66px !important;
   }
 
 

@@ -1,4 +1,4 @@
-export function formatDate (date, fmt) {
+export function formatDate(date, fmt) {
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
   }
@@ -18,8 +18,47 @@ export function formatDate (date, fmt) {
   return fmt
 }
 
-export const date_time_format_1 = 'yyyy-MM-dd hh:mm:ss'
+export function yyyyMmDd(x) {
+  const date = new Date(x)
+  const year = date.getFullYear()
+  const mon = date.getMonth() + 1
+  const day = date.getDate()
 
-function padLeftZero (str) {
+  return year + '.' + toTwo(mon) + '.' + toTwo(day)
+}
+
+export function yyyyMmDdHhMmSs(x) {
+  const date = new Date(x)
+  const year = date.getFullYear()
+  const mon = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+
+  return year + '.' + toTwo(mon) + '.' + toTwo(day) + ' ' + toTwo(hour) + ':' + toTwo(minute) + ':' + toTwo(second)
+}
+
+export function hhMmSs(x) {
+  const date = new Date(x)
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+
+  return toTwo(hour) + ':' + toTwo(minute) + ':' + toTwo(second)
+}
+
+function toTwo(val) {
+  if (val < 10) {
+    return '0' + val
+  }
+  return val
+}
+
+function padLeftZero(str) {
   return ('00' + str).substr(str.length)
 }
+
+export const date_time_format_1 = 'yyyy-MM-dd hh:mm:ss'
+export const date_time_format_2 = 'yyyy/MM/dd hh:mm:ss'
+
