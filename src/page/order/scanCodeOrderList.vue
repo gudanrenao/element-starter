@@ -37,6 +37,10 @@
       <el-form-item>
         <el-button type="primary" @click="merchantListCriteria">查询</el-button>
       </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="test">测试</el-button>
+      </el-form-item>
+      <h3>{{Authorization}}</h3>
     </el-form>
     <el-table
       :data="merchantListData"
@@ -73,6 +77,7 @@
 
 <script>
   import axios from 'axios'
+  import {mapGetters} from 'vuex'
   import {date_time_format_2, formatDate} from '~/assets/common/js/date'
   import {baseUrl} from "~/common/constant/constant";
 
@@ -132,7 +137,9 @@
     created() {
       this.merchantListCriteria()
     },
-    computed: {},
+    computed: {
+      ...mapGetters(['isLogin', 'loginName', 'Authorization'])
+    },
     watch: {
       startEnd: function (newVal) {
         this.criteria.start = formatDate(newVal[0], date_time_format_2);
@@ -143,17 +150,16 @@
       merchantListCriteria() {
         console.log(JSON.stringify(this.criteria))
         axios({
-          url: `${baseUrl}/manage/merchant/search`,
-          method: 'post',
-          data: this.criteria,
-          contentType: "application/json;charset=UTF-8",
-          withCredentials: true
+          url: `${baseUrl}/api/merchant/list`,
+          method: 'get',
+          params: this.criteria,
+          contentType: "application/json;charset=UTF-8"
         }).then((response) => {
           var res = response.data;
           this.merchantListData = res.content;
           this.totalElements = res.totalElements;
         }).catch((err) => {
-          this.ErrorHandle(err)
+          console.log(err)
         })
       },
       handleSizeChange1: function (currSize) {
@@ -164,6 +170,20 @@
       handleCurrentChange1: function (currPage) {
         this.criteria.currPage = currPage;
         this.merchantListCriteria()
+      },
+      test: function () {
+        axios({
+          url: `${baseUrl}/api/merchant/test`,
+          method: 'get',
+          contentType: "application/json;charset=UTF-8",
+          headers: {
+            'Authorization': this.Authorization
+          },
+        }).then((response) => {
+          alert(this.loginName + "：" + response.data)
+        }).catch((err) => {
+          console.log(err)
+        })
       }
     }
   }
@@ -171,13 +191,13 @@
 
 <style scoped>
 
-  .cut-line{
+  .cut-line {
     width: 7px;
     height: 22px;
     margin-right: 8px;
     background-color: #409EFF;
     display: inline-block;
-    vertical-align:middle;
+    vertical-align: middle;
   }
 
   .divTitle {
@@ -188,8 +208,9 @@
     height: 60px;
     letter-spacing: 2px;
   }
-  .demo-form-inline{
-    padding-left: 20px ;
+
+  .demo-form-inline {
+    padding-left: 20px;
     padding-top: 20px;
   }
 </style>

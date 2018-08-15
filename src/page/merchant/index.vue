@@ -149,17 +149,17 @@
       merchantListCriteria() {
         console.log(JSON.stringify(this.criteria))
         axios({
-          url: `${baseUrl}/manage/merchant/search`,
-          method: 'post',
-          data: this.criteria,
+          url: `${baseUrl}/api/merchant/list`,
+          method: 'get',
+          params: this.criteria,
           contentType: "application/json;charset=UTF-8",
-          withCredentials: true
+          withCredentials: false
         }).then((response) => {
           var res = response.data;
           this.merchantListData = res.content;
           this.totalElements = res.totalElements;
         }).catch((err) => {
-          this.ErrorHandle(err)
+          console.log(err)
         })
       },
       handleSizeChange1: function (currSize) {

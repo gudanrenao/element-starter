@@ -2,7 +2,9 @@ const state = {
   //是否已登录
   isLogin: false,
   //登录名称
-  loginName: ''
+  loginName: '',
+  //header Authorization
+  Authorization: ''
 }
 
 export default state

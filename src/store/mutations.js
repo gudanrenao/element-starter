@@ -1,12 +1,16 @@
 import * as types from './mutation-types'
 
 const mutations = {
-  [types.IS_LOGIN](state, flag) {
+  [types.SET_IS_LOGIN](state, flag) {
     state.isLogin = flag
   },
-  [types.LOGIN_NAME](state, name) {
+  [types.SET_LOGIN_NAME](state, name) {
     state.loginName = name
+  },
+  [types.SET_AUTHORIZATION](state, authorization) {
+    state.Authorization = authorization
   }
 }
+
 
 export default mutations

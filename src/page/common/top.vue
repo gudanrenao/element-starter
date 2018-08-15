@@ -13,20 +13,23 @@
           <el-dropdown-item>删除</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <span>张文</span>
+      <span>{{loginName}}</span>
   </span>
 
   </el-header>
 </template>
 
 <script>
-
+  import {mapGetters} from 'vuex'
 
   export default {
     data() {
       return {
         merchantName: '张文'
       }
+    },
+    computed: {
+      ...mapGetters(['loginName'])
     },
     methods: {
       logoutFun() {
