@@ -1,7 +1,6 @@
 import axios from 'axios'
 import store from '~/store'
 import * as types from '~/store/mutation-types'
-import router from '~/router'
 
 axios.interceptors.request.use(function (config) {
   if (config.url.indexOf('/manageUsers/refreshToken') === -1) {
