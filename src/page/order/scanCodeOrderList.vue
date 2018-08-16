@@ -139,7 +139,7 @@
       this.merchantListCriteria()
     },
     computed: {
-      ...mapGetters(['isLogin', 'loginName', 'Authorization','lastRequestTime'])
+      ...mapGetters(['isLogin', 'loginName', 'Authorization', 'lastRequestTime'])
     },
     watch: {
       startEnd: function (newVal) {
@@ -154,10 +154,7 @@
           url: `${baseUrl}/api/merchant/list`,
           method: 'get',
           params: this.criteria,
-          contentType: "application/json;charset=UTF-8",
-          headers: {
-            'Authorization': this.Authorization
-          }
+          contentType: "application/json;charset=UTF-8"
         }).then((response) => {
           var res = response.data;
           this.merchantListData = res.content;
@@ -179,10 +176,7 @@
         axios({
           url: `${baseUrl}/api/merchant/test`,
           method: 'get',
-          contentType: "application/json;charset=UTF-8",
-          headers: {
-            'Authorization': this.Authorization
-          }
+          contentType: "application/json;charset=UTF-8"
         }).then((response) => {
           alert(this.loginName + "：" + response.data + '====lastRequestTime=' + this.lastRequestTime)
         }).catch((err) => {

@@ -157,10 +157,7 @@
           url: `${baseUrl}/api/merchant/list`,
           method: 'get',
           params: this.criteria,
-          contentType: "application/json;charset=UTF-8",
-          headers: {
-            'Authorization': this.Authorization
-          }
+          contentType: "application/json;charset=UTF-8"
         }).then((response) => {
           var res = response.data;
           this.merchantListData = res.content;

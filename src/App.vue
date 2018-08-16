@@ -50,7 +50,7 @@
           } else {
             console.log('refreshToken==>操作已超时不再刷新token：' + new Date().toLocaleString())
           }
-        }, 15 * 60 * 1000);
+        }, 15 * 1000);
       }
     }
   }
