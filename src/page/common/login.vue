@@ -15,9 +15,9 @@
 
 <script>
   import axios from 'axios'
-  import {mapActions,mapGetters} from 'vuex'
+  import {mapActions, mapGetters} from 'vuex'
   import {baseUrl} from "~/common/constant/constant";
-  import {responseHandler} from '~/common/fiter/axiosResponse'
+  import {responseHandler} from '~/common/handler/axiosResponseHandler'
 
   export default {
     name: "login",
@@ -28,19 +28,25 @@
         password: ''
       }
     },
-    computed:{
+    computed: {
       ...mapGetters(['loginName'])
     },
     methods: {
       enter: function () {
-        let _this = this;
         axios.get(`${baseUrl}/manageUsers/login`, {
           params: {name: this.name, password: this.password}
         }).then((res) => {
-          console.log(res.headers.authorization)
-          _this.setLogin({isLogin: true, loginName: this.name, Authorization: res.headers.authorization})
-          alert(this.loginName);
-          _this.$router.push('/merchant/index')
+          if (res.data !== 'SUCCESS') {
+            this.$notify.error({
+              title: '登录失败',
+              message: '用户名或密码错误'
+            })
+          } else {
+            console.log(res.headers.authorization)
+            this.setLogin({isLogin: true, loginName: this.name, Authorization: res.headers.authorization})
+            this.$router.push('/merchant/index')
+          }
+
         }).catch((err) => {
           this.errorHandler(err)
         })

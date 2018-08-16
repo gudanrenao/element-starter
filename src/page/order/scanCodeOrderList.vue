@@ -40,7 +40,6 @@
       <el-form-item>
         <el-button type="primary" @click="test">测试</el-button>
       </el-form-item>
-      <h3>{{Authorization}}</h3>
     </el-form>
     <el-table
       :data="merchantListData"
@@ -77,11 +76,13 @@
 
 <script>
   import axios from 'axios'
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
   import {date_time_format_2, formatDate} from '~/assets/common/js/date'
   import {baseUrl} from "~/common/constant/constant";
+  import {responseHandler} from '~/common/handler/axiosResponseHandler'
 
   export default {
+    mixins: [responseHandler],
     data() {
       return {
         criteria: {
@@ -138,7 +139,7 @@
       this.merchantListCriteria()
     },
     computed: {
-      ...mapGetters(['isLogin', 'loginName', 'Authorization'])
+      ...mapGetters(['isLogin', 'loginName', 'Authorization','lastRequestTime'])
     },
     watch: {
       startEnd: function (newVal) {
@@ -153,13 +154,16 @@
           url: `${baseUrl}/api/merchant/list`,
           method: 'get',
           params: this.criteria,
-          contentType: "application/json;charset=UTF-8"
+          contentType: "application/json;charset=UTF-8",
+          headers: {
+            'Authorization': this.Authorization
+          }
         }).then((response) => {
           var res = response.data;
           this.merchantListData = res.content;
           this.totalElements = res.totalElements;
         }).catch((err) => {
-          console.log(err)
+          this.errorHandler(err)
         })
       },
       handleSizeChange1: function (currSize) {
@@ -178,13 +182,14 @@
           contentType: "application/json;charset=UTF-8",
           headers: {
             'Authorization': this.Authorization
-          },
+          }
         }).then((response) => {
-          alert(this.loginName + "：" + response.data)
+          alert(this.loginName + "：" + response.data + '====lastRequestTime=' + this.lastRequestTime)
         }).catch((err) => {
           console.log(err)
         })
-      }
+      },
+      ...mapActions(['setLogin'])
     }
   }
 </script>

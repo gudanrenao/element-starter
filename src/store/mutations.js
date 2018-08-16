@@ -9,8 +9,9 @@ const mutations = {
   },
   [types.SET_AUTHORIZATION](state, authorization) {
     state.Authorization = authorization
+  },
+  [types.LAST_REQUEST_TIME](state, lastTime) {
+    state.lastRequestTime = lastTime
   }
 }
-
-
 export default mutations

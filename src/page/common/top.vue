@@ -10,7 +10,8 @@
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>查看</el-dropdown-item>
           <el-dropdown-item>新增</el-dropdown-item>
-          <el-dropdown-item>删除</el-dropdown-item>
+          <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
+
         </el-dropdown-menu>
       </el-dropdown>
       <span>{{loginName}}</span>
@@ -32,22 +33,9 @@
       ...mapGetters(['loginName'])
     },
     methods: {
-      logoutFun() {
-
-      },
-      tomendian() {
-        let _this = this
-        _this.$router.push({path: '/dropdownmenu/mendianguanli'})
-      },
-      tozhanghu() {
-        let _this = this
-        _this.$router.push({path: '/dropdownmenu/zhanghuguanli'})
-      },
-      tojiesuan() {
-        let _this = this
-        _this.$router.push({path: '/dropdownmenu/jiesuanzhanghu'})
-      },
-
+      logout: function () {
+        window.location.href = 'http://' + window.location.host
+      }
     }
   }
 </script>

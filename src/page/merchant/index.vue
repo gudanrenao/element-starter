@@ -79,10 +79,13 @@
 
 <script>
   import axios from 'axios'
+  import {mapGetters} from 'vuex'
   import {date_time_format_2, formatDate} from '~/assets/common/js/date'
   import {baseUrl} from "~/common/constant/constant";
+  import {responseHandler} from '~/common/handler/axiosResponseHandler'
 
   export default {
+    mixins: [responseHandler],
     data() {
       return {
         criteria: {
@@ -138,7 +141,9 @@
     created() {
       this.merchantListCriteria()
     },
-    computed: {},
+    computed: {
+      ...mapGetters(['Authorization'])
+    },
     watch: {
       startEnd: function (newVal) {
         this.criteria.start = formatDate(newVal[0], date_time_format_2);
@@ -153,13 +158,15 @@
           method: 'get',
           params: this.criteria,
           contentType: "application/json;charset=UTF-8",
-          withCredentials: false
+          headers: {
+            'Authorization': this.Authorization
+          }
         }).then((response) => {
           var res = response.data;
           this.merchantListData = res.content;
           this.totalElements = res.totalElements;
         }).catch((err) => {
-          console.log(err)
+          this.errorHandler(err)
         })
       },
       handleSizeChange1: function (currSize) {
